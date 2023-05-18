@@ -1,0 +1,9 @@
+javac *.java
+rmic AddServerImpl
+rmiregistry
+
+on new terminal:
+java AddServer
+
+on new terminal
+java AddClient localhost 1 2

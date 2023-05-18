@@ -1,0 +1,9 @@
+idlj -fall ReverseModule.idl
+javac *.java ReverseModule/*.java
+orbd -ORBInitialPort 8000
+
+new terminal:
+java ReverseServer -ORBInitialPort 8000 -ORBInitialHost localhost
+
+new terminal:
+java ReverseClient -ORBInitialPort 8000 -ORBInitialHost localhost
