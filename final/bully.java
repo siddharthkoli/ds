@@ -6,13 +6,14 @@ class Process {
 
     Process(int id) {
         this.id = id;
-        this.activate = false;
+        this.active = true;
     }
-    
+
     public void election(List<Process> processes) {
         int highestId = 0;
         for (Process process: processes)
-            highestId = Math.max(highestId, process.id);
+            if (process.active)
+                highestId = Math.max(highestId, process.id);
 
         if (highestId == this.id) {
             announceCoordinator();
@@ -24,18 +25,18 @@ class Process {
     }
 
     public void announceCoordinator() {
-        sysout process id is selected as coordinator;
+        System.out.println(this.id + " is selected as coordinator.");
     }
 
     public void sendElectionMessageToProcess(Process process) {
-        sysout Eelection msg received by process.id from this.id;
+        System.out.println("Election msg received by " + process.id + " from " + this.id);
 
         if (process.active)
-            this.sendResponse(process.processId);
+            this.sendResponse(process.id);
     }
 
     public void sendResponse(int receiverId) {
-        sysout Process receiverId received msg from this.id;
+        System.out.println("Process " + receiverId + " received msg from " + this.id);
     }
 }
 
@@ -52,12 +53,14 @@ public class Bully {
         System.out.println("Enter The process to be made inactive : ");
         num=sc.nextInt();
 
-        processes.get(i-1).active = false;
+        processes.get(num-1).active = false;
 
         for(Process process : processes){
-            if(process.isActive){
+            if(process.active) {
                 process.election(processes);
             }
         }
+
+        sc.close();
     }
 }
