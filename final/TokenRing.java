@@ -32,7 +32,7 @@ public class TokenRing {
 
             System.out.println("Token Passing : ");
 
-            for (int i = token; i < sender; i++) {
+            for (int i = token; i != sender; i = (i + 1) % n) {
                 System.out.print(" " + i + "->");
             }
 
