@@ -1,0 +1,5 @@
+module ConcatModule {
+    interface Concat {
+        string concat(in string s1, in string s2);
+    };
+};
